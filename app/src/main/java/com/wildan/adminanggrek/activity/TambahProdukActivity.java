@@ -11,12 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.wildan.adminanggrek.R;
-import com.wildan.adminanggrek.crud.Anggrek;
-import com.wildan.adminanggrek.crud.AnggrekAdapter;
 import com.wildan.adminanggrek.crud.DBHandler;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TambahProdukActivity extends AppCompatActivity {
 
@@ -24,7 +19,6 @@ public class TambahProdukActivity extends AppCompatActivity {
     private Button button_tambahdata;
 
     private DBHandler dbHandler;
-    private AnggrekAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +56,7 @@ public class TambahProdukActivity extends AppCompatActivity {
             et_harga.setError("Isi Harga dulu");
             et_harga.requestFocus();
         }else {
-            dbHandler.tambahAnggrek(new Anggrek(form_nama, form_harga));
-            List<Anggrek> AnggrekList = dbHandler.getSemuaAnggrek();
-            adapter = new AnggrekAdapter((ArrayList<Anggrek>) AnggrekList);
-            adapter.notifyDataSetChanged();
+            dbHandler.tambahAnggrek(et_nama.getText().toString(), et_harga.getText().toString());
 
             Toast.makeText(TambahProdukActivity.this, "Berhasil Menambahkan Data", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(TambahProdukActivity.this, ProdukActivity.class);

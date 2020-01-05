@@ -5,10 +5,8 @@ public class Anggrek {
     private String nama;
     private String harga;
 
-    public Anggrek() {
-    }
-
-    public Anggrek(String nama, String harga) {
+    public Anggrek(int id, String nama, String harga) {
+        this.id = id;
         this.nama = nama;
         this.harga = harga;
     }

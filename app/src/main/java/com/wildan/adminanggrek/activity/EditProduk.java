@@ -9,17 +9,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.wildan.adminanggrek.R;
+import com.wildan.adminanggrek.crud.Anggrek;
+import com.wildan.adminanggrek.crud.DBHandler;
 
 public class EditProduk extends AppCompatActivity {
 
     TextView nama,harga;
-    Button btn;
+    Button btn_simpan;
     EditText editnama, editharga;
-    public String KEY_NAMA = "nama";
-    public String KEY_HRG = "harga";
-
-    private String nam,hrg;
+    DBHandler dbhelp;
+    Anggrek anggrek;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,25 +32,28 @@ public class EditProduk extends AppCompatActivity {
 
         nama =  (TextView) findViewById(R.id.nama_bunga);
         harga = (TextView) findViewById(R.id.harga_bunga);
-        btn = (Button) findViewById(R.id.simpan);
+        btn_simpan = (Button) findViewById(R.id.simpan);
         editnama = (EditText) findViewById(R.id.edit_nama);
         editharga = (EditText) findViewById(R.id.edit_harga);
 
-        nam = getIntent().getStringExtra(KEY_NAMA);
-        hrg = getIntent().getStringExtra(KEY_HRG);
-
-        nama.setText(nam);
-        harga.setText(hrg);
-        editnama.setText(nam);
-        editharga.setText(hrg);
-
-        btn.setOnClickListener(new View.OnClickListener() {
+        dbhelp = new DBHandler(this);
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!=null){
+            anggrek = dbhelp.getAnggrek(bundle.getInt("ID"));
+            editnama.setText(anggrek.getNama());
+            editharga.setText(anggrek.getHarga());
+            nama.setText(anggrek.getNama());
+            harga.setText(anggrek.getHarga());
+        }
+        btn_simpan.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                dbhelp.updateDataAnggrek(anggrek.getId(), editnama.getText().toString(), Double.parseDouble(editharga.getText().toString()));
                 Intent i = new Intent(EditProduk.this,ProdukActivity.class);
                 startActivity(i);
                 finish();
             }
         });
+
     }
 }
