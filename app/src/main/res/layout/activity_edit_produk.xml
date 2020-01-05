@@ -125,6 +125,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:hint="Harga"
+            android:inputType="number"
             app:fontFamily="sans-serif-smallcaps"
             />
     </RelativeLayout>

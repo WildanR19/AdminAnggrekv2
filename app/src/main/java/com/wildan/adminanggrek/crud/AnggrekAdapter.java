@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;;
+import com.google.android.material.snackbar.Snackbar;
 import com.wildan.adminanggrek.R;
 import com.wildan.adminanggrek.activity.EditProduk;
 
@@ -49,13 +50,14 @@ public class AnggrekAdapter extends RecyclerView.Adapter<AnggrekAdapter.AnggrekV
 
         TextView txt_resultnama, txt_resultharga;
         Context konteks;
-        Button btn_edit;
+        Button btn_edit, btn_hapus;
         public String KEY_NAMA = "nama";
         public String KEY_HRG = "harga";
 
         public AnggrekViewHolder(View itemView) {
             super(itemView);
             btn_edit = (Button) itemView.findViewById(R.id.btn_edit);
+            btn_hapus = (Button) itemView.findViewById(R.id.btn_hapus);
             txt_resultnama = (TextView) itemView.findViewById(R.id.nama);
             txt_resultharga = (TextView) itemView.findViewById(R.id.harga);
             btn_edit.setOnClickListener(new View.OnClickListener() {
@@ -78,4 +80,5 @@ public class AnggrekAdapter extends RecyclerView.Adapter<AnggrekAdapter.AnggrekV
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
+
 }
